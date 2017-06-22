@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>CucumberJVM Parallel Template</name>
+    <name>Sample Project Using CucumberJVM, Selenide and Maven</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
