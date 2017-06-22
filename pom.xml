@@ -114,6 +114,7 @@
                                     <!-- comma separated list of package names to scan for glue code -->
                                     <glue>
                                         <package>lv.iljapavlovs.cucumber.stepdefs</package>
+                                        <package>lv.iljapavlovs.cucumber.hooks</package>
                                     </glue>
                                     <!-- These are optional, with the default values -->
                                     <!-- Where to output the generated tests -->
@@ -159,8 +160,8 @@
                                     <!-- One of [SCENARIO, FEATURE]. SCENARIO generates one runner per scenario.  FEATURE generates a runner per feature. -->
                                     <parallelScheme>SCENARIO</parallelScheme>
                                     <!-- Specify a custom template for the generated sources (this is a path relative to the project base directory) -->
-                                    <customVmTemplate>src/test/resources/custom-runner-template.java.vm
-                                    </customVmTemplate>
+                                    <!--<customVmTemplate>src/test/resources/custom-runner-template.java.vm-->
+                                    <!--</customVmTemplate>-->
                                     <!-- Specify a custom package name for generated sources. Default is no package.-->
                                     <!--<packageName></packageName>-->
                                 </configuration>
