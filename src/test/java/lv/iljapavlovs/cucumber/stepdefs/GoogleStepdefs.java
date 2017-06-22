@@ -1,17 +1,15 @@
-package lv.iljapavlovs.stepdefs;
+package lv.iljapavlovs.cucumber.stepdefs;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import lv.iljapavlovs.pageobjects.GooglePage;
-import lv.iljapavlovs.pageobjects.GoogleSearchResultPage;
+import lv.iljapavlovs.cucumber.pageobjects.GooglePage;
+import lv.iljapavlovs.cucumber.pageobjects.GoogleSearchResultPage;
 import org.openqa.selenium.WebDriver;
 
 import static com.codeborne.selenide.Condition.text;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 

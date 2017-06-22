@@ -1,12 +1,11 @@
-package lv.iljapavlovs.hooks;
+package lv.iljapavlovs.cucumber.hooks;
 
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import lv.iljapavlovs.core.DriverFactory;
+import lv.iljapavlovs.cucumber.core.DriverFactory;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

@@ -1,4 +1,4 @@
-package lv.iljapavlovs.core;
+package lv.iljapavlovs.cucumber.core;
 
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;

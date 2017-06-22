@@ -1,4 +1,4 @@
-package lv.iljapavlovs.core;
+package lv.iljapavlovs.cucumber.core;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Proxy;
@@ -9,7 +9,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static lv.iljapavlovs.core.DriverType.FIREFOX;
 import static org.openqa.selenium.Proxy.ProxyType.MANUAL;
 
 public class DriverFactory {
@@ -17,7 +16,7 @@ public class DriverFactory {
     private WebDriver webdriver;
     private DriverType selectedDriverType;
 
-    private final DriverType defaultDriverType = FIREFOX;
+    private final DriverType defaultDriverType = DriverType.FIREFOX;
     private final String browser = System.getProperty("browser", defaultDriverType.toString()).toUpperCase();
     private final String operatingSystem = System.getProperty("os.name").toUpperCase();
     private final String systemArchitecture = System.getProperty("os.arch");

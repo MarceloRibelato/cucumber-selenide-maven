@@ -1,4 +1,4 @@
-package lv.iljapavlovs.runners;
+package lv.iljapavlovs.cucumber.runners;
 
 import com.codeborne.selenide.Configuration;
 import cucumber.api.CucumberOptions;
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:target/cucumber/milk", "json:target/cucumber/cucumber-milk.json"},
         features = {"src/test/resources/features"},
         tags = {"@milk"},
-        glue = {"lv.iljapavlovs.stepdefs", "lv.iljapavlovs.hooks"}
+        glue = {"lv.iljapavlovs.cucumber.stepdefs", "lv.iljapavlovs.cucumber.hooks"}
 )
 public class RunCukesMilkTest {
 

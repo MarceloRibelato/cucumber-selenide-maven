@@ -1,4 +1,4 @@
-package lv.iljapavlovs.pageobjects;
+package lv.iljapavlovs.cucumber.pageobjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.WebElement;
