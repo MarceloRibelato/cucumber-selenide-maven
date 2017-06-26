@@ -1,6 +1,7 @@
 package lv.iljapavlovs.cucumber.hooks;
 
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -24,6 +25,9 @@ public class Hooks {
         System.out.println("Starting Scenario: \""+ scenario.getName() +"\" with Session ID: " + sessionId);
         WebDriverRunner.getWebDriver().manage().deleteAllCookies();
         WebDriverRunner.getWebDriver().manage().window().maximize();
+        Configuration.timeout = 10000;//default is 4000
+        Configuration.collectionsTimeout = 18000;//default is 6000
+        Configuration.reportsFolder = "target/selenide-reports/tests";//default is build/reports/tests
     }
 
     @After
