@@ -13,10 +13,7 @@ import static org.openqa.selenium.Proxy.ProxyType.MANUAL;
 
 public class DriverFactory {
 
-    private WebDriver webdriver;
-    private DriverType selectedDriverType;
-
-    private final DriverType defaultDriverType = DriverType.FIREFOX;
+    private final DriverType defaultDriverType = DriverType.CHROME;
     private final String browser = System.getProperty("browser", defaultDriverType.toString()).toUpperCase();
     private final String operatingSystem = System.getProperty("os.name").toUpperCase();
     private final String systemArchitecture = System.getProperty("os.arch");
@@ -25,6 +22,8 @@ public class DriverFactory {
     private final String proxyHostname = System.getProperty("proxyHost");
     private final Integer proxyPort = Integer.getInteger("proxyPort");
     private final String proxyDetails = String.format("%s:%d", proxyHostname, proxyPort);
+    private WebDriver webdriver;
+    private DriverType selectedDriverType;
 
     public WebDriver getDriver() throws Exception {
         if (null == webdriver) {

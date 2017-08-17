@@ -7,7 +7,6 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import lv.iljapavlovs.cucumber.core.DriverFactory;
-
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -25,8 +24,8 @@ public class Hooks {
         System.out.println("Starting Scenario: \""+ scenario.getName() +"\" with Session ID: " + sessionId);
         WebDriverRunner.getWebDriver().manage().deleteAllCookies();
         WebDriverRunner.getWebDriver().manage().window().maximize();
-        Configuration.timeout = 10000;//default is 4000
-        Configuration.collectionsTimeout = 18000;//default is 6000
+        Configuration.timeout = 4000;//default is 4000
+        Configuration.collectionsTimeout = 6000;//default is 6000
         Configuration.reportsFolder = "target/selenide-reports/tests";//default is build/reports/tests
     }
 

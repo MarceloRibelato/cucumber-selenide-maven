@@ -7,21 +7,18 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import lv.iljapavlovs.cucumber.pageobjects.GooglePage;
 import lv.iljapavlovs.cucumber.pageobjects.GoogleSearchResultPage;
-import org.openqa.selenium.WebDriver;
 
 import static com.codeborne.selenide.Condition.text;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 
 public class GoogleStepdefs {
-    private WebDriver driver;
     private GooglePage googlePage;
     private GoogleSearchResultPage googleSearchResultPage;
 
 
-    @Given("^I navigate to \"([^\"]*)\"$")
-    public void iNavigateToGoogleCom(String url) throws Throwable {
-        googlePage = Selenide.open("https://" + url, GooglePage.class);
+    @Given("^I navigate to google$")
+    public void iNavigateToGoogle() throws Throwable {
+        googlePage = Selenide.open("https://google.com", GooglePage.class);
     }
 
     @When("^I search for \"([^\"]*)\"$")

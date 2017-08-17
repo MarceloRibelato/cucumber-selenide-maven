@@ -23,7 +23,7 @@ public enum DriverType implements DriverSetup {
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-            System.setProperty("webdriver.firefox.bin", "C:\\tools\\Firefox\\firefox.exe");
+//            System.setProperty("webdriver.firefox.bin", "C:\\tools\\Firefox\\firefox.exe");
             System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/geckodriver-v0.17.0-win32/geckodriver.exe");
             return new FirefoxDriver(capabilities);
         }
@@ -35,6 +35,9 @@ public enum DriverType implements DriverSetup {
             capabilities.setCapability("chrome.switches", Arrays.asList("--no-default-browser-check"));
             HashMap<String, String> chromePreferences = new HashMap<String, String>();
             chromePreferences.put("profile.password_manager_enabled", "false");
+//            ChromeOptions options = new ChromeOptions();
+//            options.setBinary("path\\to\\chrome.exe");
+//            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
             capabilities.setCapability("chrome.prefs", chromePreferences);
             return addProxySettings(capabilities, proxySettings);
         }
