@@ -1,10 +1,7 @@
-package lv.iljapavlovs.cucumber.pageobjects;
+package lv.iljapavlovs.cucumber.pageobjects.google;
 
 import com.codeborne.selenide.ElementsCollection;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 
 public class GoogleSearchResultPage {

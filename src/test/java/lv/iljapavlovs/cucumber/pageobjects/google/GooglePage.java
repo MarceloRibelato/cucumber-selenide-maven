@@ -1,4 +1,4 @@
-package lv.iljapavlovs.cucumber.pageobjects;
+package lv.iljapavlovs.cucumber.pageobjects.google;
 
 
 import com.codeborne.selenide.SelenideElement;
