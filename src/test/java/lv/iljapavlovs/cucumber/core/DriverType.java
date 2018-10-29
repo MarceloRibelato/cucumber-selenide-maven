@@ -1,72 +1,117 @@
 package lv.iljapavlovs.cucumber.core;
 
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.WebDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import java.util.HashMap;
+import lv.iljapavlovs.cucumber.config.ApplicationProperties;
+import lv.iljapavlovs.cucumber.config.ApplicationProperties.ApplicationProperty;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.Arrays;
-import java.util.HashMap;
-
-import static org.openqa.selenium.remote.CapabilityType.PROXY;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 public enum DriverType implements DriverSetup {
 
     FIREFOX {
-        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
+        public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+            if(!IS_REMOTE_DRIVER){
+                WebDriverManager.firefoxdriver().setup();
+            }
 
-            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-            return addProxySettings(capabilities, proxySettings);
-        }
+            FirefoxOptions options = new FirefoxOptions();
+            options.merge(capabilities);
+            options.setHeadless(HEADLESS);
 
-        public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-//            System.setProperty("webdriver.firefox.bin", "C:\\tools\\Firefox\\firefox.exe");
-            System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/geckodriver-v0.17.0-win32/geckodriver.exe");
-            return new FirefoxDriver(capabilities);
+            return new FirefoxDriver(options);
         }
     },
     CHROME {
-        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
+        public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+            if(!IS_REMOTE_DRIVER){
+                WebDriverManager.chromedriver().setup();
+            }
 
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-            capabilities.setCapability("chrome.switches", Arrays.asList("--no-default-browser-check"));
-            HashMap<String, String> chromePreferences = new HashMap<String, String>();
-            chromePreferences.put("profile.password_manager_enabled", "false");
-//            ChromeOptions options = new ChromeOptions();
-//            options.setBinary("path\\to\\chrome.exe");
-//            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-            capabilities.setCapability("chrome.prefs", chromePreferences);
-            return addProxySettings(capabilities, proxySettings);
-        }
+            HashMap<String, Object> chromePreferences = new HashMap<>();
+            chromePreferences.put("profile.password_manager_enabled", false);
 
-        public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-            System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver-v2.30-win32/chromedriver.exe");
-            return new ChromeDriver(capabilities);
+            ChromeOptions options = new ChromeOptions();
+            options.merge(capabilities);
+            options.setHeadless(HEADLESS);
+            options.addArguments("--no-default-browser-check");
+            options.setExperimentalOption("prefs", chromePreferences);
+
+            return new ChromeDriver(options);
         }
     },
     IE {
-        public DesiredCapabilities getDesiredCapabilities(Proxy proxySettings) {
-            DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-            capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-            capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, true);
-            capabilities.setCapability("requireWindowFocus", true);
-            return addProxySettings(capabilities, proxySettings);
+        public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+            if(!IS_REMOTE_DRIVER){
+                WebDriverManager.iedriver().setup();
+            }
+
+            InternetExplorerOptions options = new InternetExplorerOptions();
+            options.merge(capabilities);
+            options.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+            options.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, true);
+            options.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
+
+            return new InternetExplorerDriver(options);
         }
 
-        public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-            return new InternetExplorerDriver(capabilities);
+        @Override
+        public String toString() {
+            return "internet explorer";
+        }
+    },
+    EDGE {
+        public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+            if(!IS_REMOTE_DRIVER){
+                WebDriverManager.edgedriver().setup();
+            }
+
+            EdgeOptions options = new EdgeOptions();
+            options.merge(capabilities);
+
+            return new EdgeDriver(options);
+        }
+    },
+    SAFARI {
+        public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+
+            SafariOptions options = new SafariOptions();
+            options.merge(capabilities);
+
+            return new SafariDriver(options);
+        }
+    },
+    OPERA {
+        public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+            if(!IS_REMOTE_DRIVER){
+                WebDriverManager.operadriver().setup();
+            }
+
+            OperaOptions options = new OperaOptions();
+            options.merge(capabilities);
+
+            return new OperaDriver(options);
         }
     };
 
-    protected DesiredCapabilities addProxySettings(DesiredCapabilities capabilities, Proxy proxySettings) {
-        if (null != proxySettings) {
-            capabilities.setCapability(PROXY, proxySettings);
-        }
-
-        return capabilities;
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
     }
-
+    public final static boolean IS_REMOTE_DRIVER =  ApplicationProperties.getBoolean(ApplicationProperty.REMOTE_DRIVER);
+    public final static boolean HEADLESS =  ApplicationProperties.getBoolean(ApplicationProperty.HEADLESS);
 }
